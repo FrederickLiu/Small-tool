@@ -1,0 +1,14 @@
+# 根据保留比例计算要保留的LotId数量
+num_lot_ids_to_keep = int(len(unique_lot_ids) * keep_ratio)
+ 
+# 随机选择要保留的LotId
+random_lot_ids_to_keep = random.sample(list(unique_lot_ids), num_lot_ids_to_keep)
+ 
+# 根据随机选择的LotId筛选数据
+reduced_df = df[df['LotId'].isin(random_lot_ids_to_keep)]
+ 
+# 保存减少后的数据到新的Excel文件
+reduced_file = 'reduced_data.xlsx'
+reduced_df.to_excel(reduced_file, index=False)
+ 
+print(f'已成功随机筛选数据，保留了 {keep_ratio * 100}% 的数据。')
